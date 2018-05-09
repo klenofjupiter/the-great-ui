@@ -24,16 +24,14 @@ export default class Viz extends Component {
 
   componentWillReceiveProps(nextProps) {
   	//redraw charts based on new information
-  	d3.selectAll("svg > *").remove();
+  	d3.selectAll(`${this.state.sketch} > *`).remove();
   	this.drawLines(nextProps);
   }
 
   drawLines(props) {
   	let sketch = this.state.sketch
-      console.log('sketch', sketch)
-  	console.log('SKETCH', d3.select(sketch))
   	let plot = d3.select(sketch)
-  				.attr('height', '500px')
+  				.attr('height', 120 * props.lines.length + 50)
   				.attr('width', '1000px')
 
   		// console.log('prps lines', props.lines)
