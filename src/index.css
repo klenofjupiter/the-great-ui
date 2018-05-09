@@ -10,3 +10,11 @@ a {
 svg {
  padding: 25px;
 }
+
+.label {
+ display: none;
+}
+
+.makeViz {
+ display: inline-block;
+}

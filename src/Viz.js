@@ -57,14 +57,37 @@ export default class Viz extends Component {
     	 	   	 early += 20
     	 	   	 return early
     	 	    })
-    	 	   .attr('y', (index* 120) + 10)
-    	 	   .style('fill', 'none')
-    	 	   .style('stroke', 'green')
+    	 	   .attr('y', (index * 120) + 10)
+    	 	   .style('fill', chooseColor(ind))
+    	 	   .style('stroke', 'white')
+    	 	   .style('stroke-width', '2px')
 
     	 })
     })
+    //draw legend
+     const labels = props.lines[0].x
+     labels.forEach((label, index) => {
+     	let legendLine = d3.select('.viz').append('g')
+     	legendLine.append('rect')
+     			   .attr('x', '650')
+     			   .attr('y', () => 20 + (index * 20))
+     			   .attr('height', '10px')
+     			   .attr('width', '10px')
+     			   .style('fill', chooseColor(index))
+
+     	legendLine.append('text')
+     			  .attr('x', '665')
+     			  .attr('y', () => 28 + (index * 20))
+     			  .text(label)
+     })
   }
   render(){
   	return <svg className="viz" />
   }
+}
+
+
+function chooseColor(ind){
+  let colors = ['#581845', '#900C34', '#C70039', '#FF5733', '#FFC300', '#36D1C4', '#F6318C']
+  return colors[ind]
 }
