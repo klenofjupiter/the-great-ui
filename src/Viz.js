@@ -28,10 +28,11 @@ export default class Viz extends Component {
   drawLines(props) {
   	let plot = d3.select('.viz')
   				.attr('height', '800px')
-  				.attr('width', '800px')
+  				.attr('width', '1000px')
 
   		// console.log('prps lines', props.lines)
     let startHeight = 50;
+    let leftMargin = 80; 
      //"chart title" or pivot filter + pivot value
      plot.append('text')
      	 .attr('x', '200')
@@ -46,11 +47,20 @@ export default class Viz extends Component {
     	 	.attr('class', 'border')
     	    .attr('width', '620px')
     	 	.attr('height', '100px')
-    	 	.attr('x', '10')
+    	 	.attr('x', leftMargin + 10)
     	 	.attr('y' ,startHeight + (index * 120))
     	 	.style('stroke', 'black')
     	 	.style('fill', 'none')
     	 	.style('stroke-width', '1px')
+
+    	//query label 
+    	bar.append('text')
+    		.attr('class', 'query-label')
+    		.attr('x', '10')
+    		.attr('y', startHeight + (index * 120) + 50)
+    		.style('fill', 'black')
+    		.style('font-size', '20')
+    		.text(line.y)
 
     	 line.x.forEach((x, ind) => {
     	 	//draw each section of horizontal bar
@@ -62,7 +72,7 @@ export default class Viz extends Component {
     	 	   	 for (let i = 0; i < ind; i++){
     	 	   	  early = early + (dummyData[index][i] * 600)
     	 	   	 }
-    	 	   	 early += 20
+    	 	   	 early = leftMargin + early + 20
     	 	   	 return early
     	 	    })
     	 	   .attr('y', startHeight + (index * 120) + 10)
@@ -70,13 +80,13 @@ export default class Viz extends Component {
     	 	   .style('stroke', 'white')
     	 	   .style('stroke-width', '2px')
 
-    	 	bar.append('text')
+    	 	bar.append('text') //percentage data
     	 	   .attr('x', () => {
     	 	   	let early = 0;
     	 	   	 for (let i = 0; i < ind; i++){
     	 	   	  early = early + (dummyData[index][i] * 600)
     	 	   	 }
-    	 	   	 early += 25
+    	 	   	 early = early + leftMargin + 25
     	 	   	 return early
     	 	   }) 
     	 	   .attr('y', startHeight + (index * 120) + 80)
@@ -90,14 +100,14 @@ export default class Viz extends Component {
      labels.forEach((label, index) => {
      	let legendLine = d3.select('.viz').append('g')
      	legendLine.append('rect')
-     			   .attr('x', '650')
+     			   .attr('x', leftMargin + 650)
      			   .attr('y', () => startHeight + (20 + (index * 20)))
      			   .attr('height', '10px')
      			   .attr('width', '10px')
      			   .style('fill', chooseColor(index))
 
      	legendLine.append('text')
-     			  .attr('x', '665')
+     			  .attr('x', leftMargin + 665)
      			  .attr('y', () => startHeight + (28 + (index * 20)))
      			  .text(label)
      })
