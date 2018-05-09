@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 
+//all math and asynchronous data fetching should be done in parent components
+//all visualization/d3 commands should be done here
 let dummyData = [ [.60, .20, .20], [.20, .15, .65],  [.70,  .10, .20]]
 
-export default class Viz extends Component {
+export default class Viz extends Component {                                     
   constructor(props){
   	super(props);
   	this.state ={

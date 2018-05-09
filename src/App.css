@@ -21,6 +21,9 @@
 .App-intro {
   font-size: large;
 }
+.logo {
+  height: 70px;
+}
 
 /*@keyframes App-logo-spin {
   from { transform: rotate(0deg); }
