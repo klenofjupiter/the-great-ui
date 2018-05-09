@@ -22,6 +22,7 @@ export default class Chartmaker extends Component {
   	this.YValue = this.YValue.bind(this);
   	this.changePivot = this.changePivot.bind(this);
   	this.erase = this.erase.bind(this);
+    this.removeLine = this.removeLine.bind(this);
   }
 
   onSubmit(evt) {
@@ -57,6 +58,15 @@ export default class Chartmaker extends Component {
   erase(){
   	this.props.removeChart(this.props.name)
   }
+  removeLine(index){
+    let cleanList = []
+    for (let i = 0; i < this.state.lines.length; i ++){
+      if (i !== index){
+        cleanList.push(this.state.lines[i]);
+      }
+    }
+    this.setState({lines: cleanList})
+  }
   render(){
     // console.log('lines to plot', this.state.lines)
   	let x = this.props.filters.x;
@@ -83,7 +93,7 @@ export default class Chartmaker extends Component {
   	  </select>
   	  <button type="submit">add line</button>
   	  </form>
-  	  {this.state.lines.length ? <Viz className={"viz-" + this.props.name} lines={this.state.lines} filters={this.props.filters} pivotVal={this.state.pivot} index={this.props.name}/> : null}
+  	  {this.state.lines.length ? <Viz className={"viz-" + this.props.name} lines={this.state.lines} removeLine={this.removeLine} filters={this.props.filters} pivotVal={this.state.pivot} index={this.props.name}/> : null}
   	  <button onClick={this.erase}> remove chart </button>
   	  </div> 
     )

@@ -67,6 +67,9 @@ export default class Viz extends Component {
     		.style('fill', 'black')
     		.style('font-size', '15')
     		.text(line.y)
+        .on('click', () => {
+          props.removeLine(index)
+        })
 
     	 line.x.forEach((x, ind) => {
     	 	//draw each section of horizontal bar
