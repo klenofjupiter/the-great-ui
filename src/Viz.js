@@ -31,9 +31,9 @@ export default class Viz extends Component {
   drawLines(props) {
   	let sketch = this.state.sketch
       console.log('sketch', sketch)
-  	console.log('SKETCH', d3.select('.viz-0'))
+  	console.log('SKETCH', d3.select(sketch))
   	let plot = d3.select(sketch)
-  				.attr('height', '800px')
+  				.attr('height', '500px')
   				.attr('width', '1000px')
 
   		// console.log('prps lines', props.lines)
@@ -119,7 +119,7 @@ export default class Viz extends Component {
      })
   }
   render(){
-  	return <svg className={'.viz-'+this.props.index}/>
+  	return <svg className={'viz-'+this.props.index}/>
   }
 }
 
