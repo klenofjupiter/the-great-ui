@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import ChartMaker from './Chartmaker.js';
 import './App.css';
 
-// to do: add remove chart functionality 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
+const initialState = {
       filters: ['gender', 'race', 'level'],
       pivot: '', 
       'x': '', 
@@ -14,8 +10,16 @@ class App extends Component {
       renderChart: false,
       chartList: {}
     }
+
+
+// to do: add remove chart functionality 
+class App extends Component {
+  constructor() {
+    super();
+    this.state = initialState
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.clearAll = this.clearAll.bind(this);
   }
 
   onSubmit(evt) {
@@ -35,6 +39,10 @@ class App extends Component {
   }
   onChange(evt) {
     this.setState({[evt.target.name] : evt.target.value})
+  }
+
+  clearAll(evt) {
+    this.setState({...initialState})
   }
   render() {
     return (
@@ -56,7 +64,7 @@ class App extends Component {
           <option disabled="disabled" value="default"> select y </option>
           { this.state.filters.map((filter) => <option key={filter} value={filter}>{filter}</option>)}
           </select>
-          <button type="submit">add chart!</button>
+          <button type="submit">add chart!</button> <button onClick={this.clearAll}> clear all </button>
         </form>
         {this.state.renderChart && Object.keys(this.state.chartList).map((key) => <ChartMaker name={key} key={key} filters={this.state.chartList[key]} /> )}
       </div>
