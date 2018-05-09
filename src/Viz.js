@@ -4,8 +4,11 @@ import * as d3 from 'd3';
 let dummyData = [ [.60, .20, .20], [.20, .15, .65],  [.70,  .10, .20]]
 
 export default class Viz extends Component {
-  constructor(){
-  	super();
+  constructor(props){
+  	super(props);
+  	this.state ={
+  	  sketch: '.viz-' + this.props.index
+  	}
   	this.drawLines = this.drawLines.bind(this);
   }
 
@@ -21,13 +24,14 @@ export default class Viz extends Component {
 
   componentWillReceiveProps(nextProps) {
   	//redraw charts based on new information
-  	d3.selectAll("svg > *").remove();
+  	d3.selectAll(`${this.state.sketch} > *`).remove();
   	this.drawLines(nextProps);
   }
 
   drawLines(props) {
-  	let plot = d3.select('.viz')
-  				.attr('height', '800px')
+  	let sketch = this.state.sketch
+  	let plot = d3.select(sketch)
+  				.attr('height', 120 * props.lines.length + 50)
   				.attr('width', '1000px')
 
   		// console.log('prps lines', props.lines)
@@ -42,7 +46,7 @@ export default class Viz extends Component {
     
      props.lines.forEach((line, index) => {
     	 //draw horizontal bar overall
-    	 let bar = d3.select('.viz').append('g').attr('class', index)
+    	 let bar = d3.select(sketch).append('g').attr('class', index)
           bar.append('rect')
     	 	.attr('class', 'border')
     	    .attr('width', '620px')
@@ -98,7 +102,7 @@ export default class Viz extends Component {
     //draw legend
      const labels = props.lines[0].x
      labels.forEach((label, index) => {
-     	let legendLine = d3.select('.viz').append('g')
+     	let legendLine = d3.select(sketch).append('g')
      	legendLine.append('rect')
      			   .attr('x', leftMargin + 650)
      			   .attr('y', () => startHeight + (20 + (index * 20)))
@@ -113,7 +117,7 @@ export default class Viz extends Component {
      })
   }
   render(){
-  	return <svg className="viz" />
+  	return <svg className={'viz-'+this.props.index}/>
   }
 }
 

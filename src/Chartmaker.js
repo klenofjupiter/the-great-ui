@@ -78,7 +78,7 @@ export default class Chartmaker extends Component {
   	  </select>
   	  <button type="submit">add line</button>
   	  </form>
-  	  {this.state.lines.length ? <Viz lines={this.state.lines} filters={this.props.filters} pivotVal={this.state.pivot}/> : null}
+  	  {this.state.lines.length ? <Viz className={"viz-" + this.props.name} lines={this.state.lines} filters={this.props.filters} pivotVal={this.state.pivot} index={this.props.name}/> : null}
   	  </div> 
     )
   }
