@@ -26,11 +26,18 @@ export default class Viz extends Component {
   }
 
   drawLines(props) {
-  	d3.select('.viz')
-  		.attr('height', '800px')
-  		.attr('width', '800px')
+  	let plot = d3.select('.viz')
+  				.attr('height', '800px')
+  				.attr('width', '800px')
 
   		// console.log('prps lines', props.lines)
+    let startHeight = 50;
+     //"chart title" or pivot filter + pivot value
+     plot.append('text')
+     	 .attr('x', '200')
+     	 .attr('y', '30')
+     	 .style('font-size', '35')
+     	 .text(props.filters.pivot + ": " + props.pivotVal)
     
      props.lines.forEach((line, index) => {
     	 //draw horizontal bar overall
@@ -40,10 +47,11 @@ export default class Viz extends Component {
     	    .attr('width', '620px')
     	 	.attr('height', '100px')
     	 	.attr('x', '10')
-    	 	.attr('y' ,index * 120)
+    	 	.attr('y' ,startHeight + (index * 120))
     	 	.style('stroke', 'black')
     	 	.style('fill', 'none')
     	 	.style('stroke-width', '1px')
+
     	 line.x.forEach((x, ind) => {
     	 	//draw each section of horizontal bar
     	 	bar.append('rect')
@@ -57,10 +65,23 @@ export default class Viz extends Component {
     	 	   	 early += 20
     	 	   	 return early
     	 	    })
-    	 	   .attr('y', (index * 120) + 10)
+    	 	   .attr('y', startHeight + (index * 120) + 10)
     	 	   .style('fill', chooseColor(ind))
     	 	   .style('stroke', 'white')
     	 	   .style('stroke-width', '2px')
+
+    	 	bar.append('text')
+    	 	   .attr('x', () => {
+    	 	   	let early = 0;
+    	 	   	 for (let i = 0; i < ind; i++){
+    	 	   	  early = early + (dummyData[index][i] * 600)
+    	 	   	 }
+    	 	   	 early += 25
+    	 	   	 return early
+    	 	   }) 
+    	 	   .attr('y', startHeight + (index * 120) + 80)
+    	 	   .style('fill', 'white')
+    	 	   .text(() => dummyData[index][ind] * 100 + "%" )
 
     	 })
     })
@@ -70,14 +91,14 @@ export default class Viz extends Component {
      	let legendLine = d3.select('.viz').append('g')
      	legendLine.append('rect')
      			   .attr('x', '650')
-     			   .attr('y', () => 20 + (index * 20))
+     			   .attr('y', () => startHeight + (20 + (index * 20)))
      			   .attr('height', '10px')
      			   .attr('width', '10px')
      			   .style('fill', chooseColor(index))
 
      	legendLine.append('text')
      			  .attr('x', '665')
-     			  .attr('y', () => 28 + (index * 20))
+     			  .attr('y', () => startHeight + (28 + (index * 20)))
      			  .text(label)
      })
   }
