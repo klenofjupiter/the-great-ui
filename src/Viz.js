@@ -36,10 +36,11 @@ export default class Viz extends Component {
 
   		// console.log('prps lines', props.lines)
     let startHeight = 50;
-    let leftMargin = 80; 
+    let leftMargin = 140; 
      //"chart title" or pivot filter + pivot value
      plot.append('text')
-     	 .attr('x', '200')
+     	 .attr('x', '0')
+     	 .attr('text-anchor', 'center')
      	 .attr('y', '30')
      	 .style('font-size', '35')
      	 .text(props.filters.pivot + ": " + props.pivotVal)
@@ -60,10 +61,11 @@ export default class Viz extends Component {
     	//query label 
     	bar.append('text')
     		.attr('class', 'query-label')
-    		.attr('x', '10')
+    		.attr('x', '130')
+    		.attr('text-anchor', 'end')
     		.attr('y', startHeight + (index * 120) + 50)
     		.style('fill', 'black')
-    		.style('font-size', '20')
+    		.style('font-size', '15')
     		.text(line.y)
 
     	 line.x.forEach((x, ind) => {
