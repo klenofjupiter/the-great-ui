@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Viz from './Viz'
 
+
 //to do: add remove line functionality 
 
 export default class Chartmaker extends Component {
@@ -52,7 +53,7 @@ export default class Chartmaker extends Component {
   	this.setState({y : evt.target.value})
   }
   render(){
-    console.log('lines to plot', this.state.lines)
+    // console.log('lines to plot', this.state.lines)
   	let x = this.props.filters.x;
   	x = this.state[x].filter((el) => el !== "all") //the x axis cannot be "all" -- the d3 will render "the selected sections and the remainder"
   	let y = this.props.filters.y;
@@ -64,7 +65,8 @@ export default class Chartmaker extends Component {
   	  <div className="chart-maker">
   	  <form onSubmit={this.onSubmit}>
   	  <label> select pivot function </label>
-  	  <select name="pivot" disabled={this.state.lines.length ? true : false} onChange={this.changePivot}>
+  	  <select name="pivot" disabled={this.state.lines.length ? true : false} onChange={this.changePivot} value={this.state.pivot || "default"}>
+  	   <option disabled='true' value="default">select a pivot value</option>
   	   {this.state[pivot].map((el) => <option key={el} value={el}>{el}</option>)}
   	  </select>
   	  <label> select x function </label>
@@ -76,7 +78,7 @@ export default class Chartmaker extends Component {
   	  </select>
   	  <button type="submit">add line</button>
   	  </form>
-  	   <Viz />
+  	  {this.state.lines.length ? <Viz lines={this.state.lines}/> : null}
   	  </div> 
     )
   }
