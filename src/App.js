@@ -58,19 +58,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h2 className="App-intro">let's make a chart</h2>
+        <h2 className="App-intro">I'm interested in...</h2>
         <form onSubmit={this.onSubmit}>
-          <label>Pivot:</label>
+          <label>The </label>
           <select disabled={Object.keys(this.state.chartList).length ? true : false} name="pivot" onChange={this.onChange} value={this.state.pivot || 'default'}>
           <option disabled="disabled" value="default"> select pivot </option>
           { this.state.filters.map((filter) => <option key={filter} value={filter}>{filter}</option>)}
-          </select>
-          <label>X:</label>
+          </select> 
+          <label> breakdown in </label>
           <select disabled={Object.keys(this.state.chartList).length ? true : false} name="x" onChange={this.onChange} value={this.state.x || 'default'}>
           <option disabled="disabled" value="default"> select x </option>
           { this.state.filters.map((filter) => <option key={filter} value={filter}>{filter}</option>)}
           </select>
-          <label>Y:</label>
+          <label> x </label>
           <select disabled={Object.keys(this.state.chartList).length ? true : false} name="y" onChange={this.onChange} value={this.state.y || 'default'}>
           <option disabled="disabled" value="default"> select y </option>
           { this.state.filters.map((filter) => <option key={filter} value={filter}>{filter}</option>)}
