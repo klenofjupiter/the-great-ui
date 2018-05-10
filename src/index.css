@@ -55,8 +55,21 @@ button{
   text-align: right;
   padding-top: 20px;
 }
+.chartmaker-form > div {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
 .remove-chart {
   max-width: 80px;
   max-height: 20px;
   margin-left: 150px;
 }
+/*.weird-label {
+ float: left;
+ margin-left: 0px;
+ margin-bottom: 20px;
+}*/
+
+
+
+

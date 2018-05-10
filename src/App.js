@@ -84,7 +84,7 @@ class App extends Component {
           </select>
           <button type="submit">add chart!</button> <button onClick={this.clearAll}> clear all </button>
         </form>
-        {this.state.renderChart && Object.keys(this.state.chartList).map((key) => <ChartMaker  name={key} key={key} filters={this.state.chartList[key]} removeChart={this.removeChart}/> )}
+        {this.state.renderChart && Object.keys(this.state.chartList).map((key) => <ChartMaker addChart={this.onSubmit}  name={key} key={key} filters={this.state.chartList[key]} removeChart={this.removeChart}/> )}
         {!Object.keys(this.state.chartList).length && <DummyChart />}
       </div>
     );

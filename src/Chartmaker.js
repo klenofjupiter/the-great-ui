@@ -86,9 +86,9 @@ export default class Chartmaker extends Component {
   	   <option disabled='true' value="default">select a pivot value</option>
   	   {this.state[pivot].map((el) => <option key={el} value={el}>{el}</option>)}
   	  </select>
-  	   <label> and filter by </label>
+  	   <label className="weird-label"> and to filter by: </label>
       { x.map((el) => <div key={el}><label>{el}:</label><input value={el} type="checkbox" onChange={this.XValue} disabled={this.state.lines.length ? true : false}/></div>)}
-  	  <label> select y function </label>
+  	  <label> and </label>
   	  <select name="y" onChange={this.YValue} value={this.state.y || "default"}>
   	    <option disabled='true' value="default">select a y value</option>
   	   {this.state[y].map((el) => <option key={el} value={el}>{el}</option>)}
@@ -97,7 +97,8 @@ export default class Chartmaker extends Component {
   	  </form>
       {!this.state.lines.length && <DummyChart className="internal-dummy"/>}
   	  {this.state.lines.length ? <Viz className={"viz-" + this.props.name} lines={this.state.lines} removeLine={this.removeLine} filters={this.props.filters} pivotVal={this.state.pivot} index={this.props.name}/> : null}
-  	  <button onClick={this.erase} className="remove-chart"> remove chart </button>
+  	  <button onClick={this.erase} className="remove-chart"> remove chart </button> <br/>
+     { /* this weirdly doesnt work quite right<button className="remove-chart" onClick={this.props.addChart}> new pivot </button>*/}
   	  </div> 
     )
   }

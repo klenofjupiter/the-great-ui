@@ -36,15 +36,25 @@ export default class Viz extends Component {
   				.attr('height', 120 * props.lines.length + 50)
   				.attr('width', '1000px')
 
-  		// console.log('prps lines', props.lines)
-    let startHeight = 50;
+    let startHeight = 60;
     let leftMargin = 140; 
+
+    //plot border 
+
+    plot.append('rect')
+        .attr('x', '0')
+        .attr('y', '0')
+        .attr('width', '1000px')
+        .attr('height', 120 * props.lines.length + 70)
+        .style('stroke', 'black')
+        .style('fill', 'none')
+        .style('stroke-width', '2px')
      //"chart title" or pivot filter + pivot value
      plot.append('text')
-     	 .attr('x', '0')
+     	 .attr('x', '100')
      	 .attr('text-anchor', 'center')
-     	 .attr('y', '30')
-     	 .style('font-size', '35')
+     	 .attr('y', '40')
+     	 .style('font-size', '25')
      	 .text(props.filters.pivot + ": " + props.pivotVal)
     
      props.lines.forEach((line, index) => {
