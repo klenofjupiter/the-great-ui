@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ChartMaker from './Chartmaker.js';
+import DummyChart from './DummyChart'
 import './App.css';
 
 const initialState = {
@@ -77,6 +78,7 @@ class App extends Component {
           </select>
           <button type="submit">add chart!</button> <button onClick={this.clearAll}> clear all </button>
         </form>
+        {!this.state.renderChart && <DummyChart />}
         {this.state.renderChart && Object.keys(this.state.chartList).map((key) => <ChartMaker name={key} key={key} filters={this.state.chartList[key]} removeChart={this.removeChart}/> )}
       </div>
     );
