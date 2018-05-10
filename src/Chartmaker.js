@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Viz from './Viz'
+import DummyChart from './DummyChart';
 
 
 //to do: add remove line functionality 
@@ -30,6 +31,7 @@ export default class Chartmaker extends Component {
     if(this.state.pivot && this.state.y && this.state.x.length){
       let line = { pivot: this.state.pivot, x: this.state.x, y: this.state.y}
       this.setState({y: "", lines: [...this.state.lines, line]})
+      // this.props.hideDummy();
     }
   }
 
@@ -78,14 +80,14 @@ export default class Chartmaker extends Component {
 //the pivot and the x value must be set for the whole chart
   	return(
   	  <div className="chart-maker">
-  	  <form onSubmit={this.onSubmit}>
+  	  <form onSubmit={this.onSubmit} className="chartmaker-form">
   	  <label> i want to pivot by </label>
   	  <select name="pivot" disabled={this.state.lines.length ? true : false} onChange={this.changePivot} value={this.state.pivot || "default"}>
   	   <option disabled='true' value="default">select a pivot value</option>
   	   {this.state[pivot].map((el) => <option key={el} value={el}>{el}</option>)}
   	  </select>
-  	  <label> and filter by </label>
-  	   { x.map((el) => <div key={el}><label>{el}:</label><input value={el} type="checkbox" onChange={this.XValue} disabled={this.state.lines.length ? true : false}/></div>)}
+  	   <label> and filter by </label>
+      { x.map((el) => <div key={el}><label>{el}:</label><input value={el} type="checkbox" onChange={this.XValue} disabled={this.state.lines.length ? true : false}/></div>)}
   	  <label> select y function </label>
   	  <select name="y" onChange={this.YValue} value={this.state.y || "default"}>
   	    <option disabled='true' value="default">select a y value</option>
@@ -93,8 +95,9 @@ export default class Chartmaker extends Component {
   	  </select>
   	  <button type="submit">add line</button>
   	  </form>
+      {!this.state.lines.length && <DummyChart className="internal-dummy"/>}
   	  {this.state.lines.length ? <Viz className={"viz-" + this.props.name} lines={this.state.lines} removeLine={this.removeLine} filters={this.props.filters} pivotVal={this.state.pivot} index={this.props.name}/> : null}
-  	  <button onClick={this.erase}> remove chart </button>
+  	  <button onClick={this.erase} className="remove-chart"> remove chart </button>
   	  </div> 
     )
   }

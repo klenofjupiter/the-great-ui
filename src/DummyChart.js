@@ -10,7 +10,7 @@ export default class DummyChart extends Component {
 	    .attr("x", 0)
 	    .attr("y", 0)
 	    .attr("height", '500px')
-	    .attr("width", '1000px')
+	    .attr("width", '900px')
 	    .style("stroke", 'black')
 	    .style("fill", "none")
 	    .style("stroke-width", '2px');
