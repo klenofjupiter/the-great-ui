@@ -70,7 +70,7 @@ export default class Chartmaker extends Component {
     this.setState({lines: cleanList})
   }
   render(){
-    // console.log('lines to plot', this.state.lines)
+    console.log('data', this.props.data)
   	let x = this.props.filters.x;
   	x = this.state[x].filter((el) => el !== "all") //the x axis cannot be "all" -- the d3 will render "the selected sections and the remainder"
   	let y = this.props.filters.y;
@@ -98,7 +98,7 @@ export default class Chartmaker extends Component {
       {!this.state.lines.length && <DummyChart className="internal-dummy"/>}
   	  {this.state.lines.length ? <Viz className={"viz-" + this.props.name} lines={this.state.lines} removeLine={this.removeLine} filters={this.props.filters} pivotVal={this.state.pivot} index={this.props.name}/> : null}
   	  <button onClick={this.erase} className="remove-chart"> remove chart </button> <br/>
-     { /* this weirdly doesnt work quite right<button className="remove-chart" onClick={this.props.addChart}> new pivot </button>*/}
+     { /* this weirdly doesnt work quite right <button className="remove-chart" onClick={this.props.addChart}> new pivot </button>*/}
   	  </div> 
     )
   }

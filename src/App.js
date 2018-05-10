@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ChartMaker from './Chartmaker.js';
 import DummyChart from './DummyChart';
 import './App.css';
+import axios from 'axios';
 
 const initialState = {
       filters: ['gender', 'race', 'level'],
@@ -10,6 +11,7 @@ const initialState = {
       'y': '', 
       renderChart: false,
       chartList: {},
+      data: {},
       // dummy: true,
     }
 
@@ -28,6 +30,12 @@ class App extends Component {
 
   onSubmit(evt) {
     evt.preventDefault();
+    let name = Object.keys(this.state.chartList).length+"";
+    axios.get('/JobPatterns.json') //obviously will specify more relevant route
+    .then((result) => {
+      this.setState({data: {...this.state.data, [name] : result.data }})
+    })
+
     let newChart = {
       pivot: this.state.pivot,
       x: this.state.x, 
@@ -37,7 +45,6 @@ class App extends Component {
       console.log('invalid selection, each axis must be selected and unique')
     }else{
       console.log('all selections valid')
-     let name = Object.keys(this.state.chartList).length+"";
      this.setState({renderChart: true, chartList: {...this.state.chartList, [name] : newChart}})
     }
   }
@@ -84,7 +91,7 @@ class App extends Component {
           </select>
           <button type="submit">add chart!</button> <button onClick={this.clearAll}> clear all </button>
         </form>
-        {this.state.renderChart && Object.keys(this.state.chartList).map((key) => <ChartMaker addChart={this.onSubmit}  name={key} key={key} filters={this.state.chartList[key]} removeChart={this.removeChart}/> )}
+        {this.state.renderChart && Object.keys(this.state.chartList).map((key) => <ChartMaker data={this.state.data[key]} addChart={this.onSubmit}  name={key} key={key} filters={this.state.chartList[key]} removeChart={this.removeChart}/> )}
         {!Object.keys(this.state.chartList).length && <DummyChart />}
       </div>
     );
