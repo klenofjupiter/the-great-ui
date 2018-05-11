@@ -3,8 +3,17 @@ import * as d3 from 'd3';
 
 export default class DummyChart extends Component {
  componentDidMount() {
-  let plot = d3.select('.dummy-chart').attr('height', '500px').attr('width', '1000px')
+  let plot;
+
+  if(this.props.name){
+    plot = d3.select(`.dummy-${this.props.name}`)
+  } else {
+    plot = d3.select('.dummy-chart')
+  }
+
+  plot.attr('height', '500px').attr('width', '1000px')
  
+   console.log('im RUNNING and my name is', this.props.name)
  //border
    plot.append("rect")
 	    .attr("x", 0)
@@ -101,6 +110,6 @@ export default class DummyChart extends Component {
  	return false;
  }
  render(){
-   return ( <svg className="dummy-chart" />)
+   return ( <svg className={`dummy-chart dummy-${this.props.name}`} />)
  }
 }

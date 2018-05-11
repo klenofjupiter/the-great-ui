@@ -60,10 +60,11 @@ button{
   margin-bottom: 5px;
 }
 .remove-chart {
-  max-width: 80px;
-  max-height: 20px;
+  width: 80px;
+  height: 20px;
   margin-left: 150px;
 }
+
 /*.weird-label {
  float: left;
  margin-left: 0px;
