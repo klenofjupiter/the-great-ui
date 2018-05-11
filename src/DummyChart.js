@@ -12,8 +12,7 @@ export default class DummyChart extends Component {
   }
 
   plot.attr('height', '500px').attr('width', '1000px')
- 
-   console.log('im RUNNING and my name is', this.props.name)
+
  //border
    plot.append("rect")
 	    .attr("x", 0)
