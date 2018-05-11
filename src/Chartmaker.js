@@ -75,7 +75,7 @@ export default class Chartmaker extends Component {
   	x = this.state[x].filter((el) => el !== "all") //the x axis cannot be "all" -- the d3 will render "the selected sections and the remainder"
   	let y = this.props.filters.y;
   	let pivot = this.props.filters.pivot;
-  console.log('my name is chart', this.props.name)
+
  //only the y value can change between lines
 //the pivot and the x value must be set for the whole chart
   	return(

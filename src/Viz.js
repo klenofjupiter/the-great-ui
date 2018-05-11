@@ -73,11 +73,11 @@ export default class Viz extends Component {
     	//query label 
     	bar.append('text')
     		.attr('class', 'query-label')
-    		.attr('x', '130')
+    		.attr('x', '140')
     		.attr('text-anchor', 'end')
     		.attr('y', startHeight + (index * 120) + 50)
     		.style('fill', 'black')
-    		.style('font-size', '15')
+    		.style('font-size', '14')
     		.text(line.y)
         .on('click', () => {
           props.removeLine(index)
