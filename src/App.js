@@ -12,6 +12,7 @@ const initialState = {
       renderChart: false,
       chartList: {},
       data: {},
+      id: 0, // this is a counter to keep every chart name unique, even if you remove and add them 
       // dummy: true,
     }
 
@@ -30,7 +31,7 @@ class App extends Component {
 
   onSubmit(evt) {
     evt.preventDefault();
-    let name = Object.keys(this.state.chartList).length+"";
+    let name = this.state.id + "";
     axios.get('/JobPatterns.json') //obviously will specify more relevant route
     .then((result) => {
       this.setState({data: {...this.state.data, [name] : result.data }})
@@ -45,7 +46,7 @@ class App extends Component {
       console.log('invalid selection, each axis must be selected and unique')
     }else{
       console.log('all selections valid')
-     this.setState({renderChart: true, chartList: {...this.state.chartList, [name] : newChart}})
+     this.setState({renderChart: true, chartList: {...this.state.chartList, [name] : newChart}, id: this.state.id + 1})
     }
   }
   onChange(evt) {
